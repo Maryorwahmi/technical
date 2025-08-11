@@ -1,0 +1,7 @@
+fastapi
+uvicorn
+pandas
+pandas-ta
+MetaTrader5
+python-dotenv
+schedule
