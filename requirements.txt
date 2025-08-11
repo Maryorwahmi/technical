@@ -2,6 +2,6 @@ fastapi
 uvicorn
 pandas
 pandas-ta
-MetaTrader5
+# MetaTrader5  # only works locally on Windows
 python-dotenv
 schedule
