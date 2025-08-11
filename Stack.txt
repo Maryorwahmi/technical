@@ -1,0 +1,80 @@
+⚙️ My Forex Analyzer Tech Stack
+Since my project involves real-time market data, multi-timeframe analysis, technical signal generation, and possibly automated execution, I’ve carefully chosen a stack that balances speed, flexibility, and long-term scalability.
+
+🧱 1. Backend — Logic, Automation, and API Layer
+🔧 Chosen Language: Python
+
+Why I chose it:
+
+Fast to prototype
+
+Huge ecosystem for trading (TA-Lib, pandas-ta, MetaTrader5)
+
+Ideal for data analysis, automation, and backtesting
+
+Works seamlessly with APIs and schedulers
+
+📚 Key Libraries & Tools I use:
+Purpose	Tool
+Technical Indicators	pandas-ta, TA-Lib, btalib
+Multi-Timeframe Handling	pandas, numpy, SQLite or Postgres
+Scheduling Tasks	APScheduler, Celery, cron
+MT5 Integration	MetaTrader5 Python module
+Backtesting (optional)	Backtrader, btgym, QuantConnect
+Alerts / Notifications	Telegram Bot API, SMTP, discord.py
+API Backend	FastAPI (preferred) or Flask
+
+✅ Why I prefer FastAPI:
+Fast and async — handles high-frequency updates well
+
+Automatically generates Swagger UI docs
+
+Clean, modern, and production-ready
+
+Works great as a REST API provider for my frontend
+
+🖥️ 2. Frontend — Signal Viewer, Controls, Logs
+Depending on what I’m building — fast MVP or full-scale dashboard — I’m choosing between:
+
+Option 1: 🟢 Streamlit (my choice for quick builds)
+Pure Python = easy integration with backend logic
+
+Great for visualizing signals, logs, charts, status panels
+
+Zero frontend coding required
+
+Can run locally or on a VPS
+
+💽 3. Database — Signal History, Logs, Strategy Results
+Purpose	Tool	Why I Use It
+Local Dev/Test	SQLite	Simple and file-based — perfect for dev
+Production Use	PostgreSQL	Robust, handles concurrency, good for REST APIs
+Time-Series Data	InfluxDB (optional)	If I store large tick or candle sets
+
+🤖 4. Trading Execution — Connecting to MetaTrader 5
+My Options:
+Approach	Tool	When I Use It
+Direct Integration	MetaTrader5 Python API	When I want Python to control trades directly
+EA Signal Receiver	Custom MQL5 EA + Webhook	If I want my analyzer external to MT5
+Middleware Bridge	FastAPI + MQL5	If I need flexible command flow + logging
+
+✅ My Preference:
+I usually start with the MetaTrader5 Python module — it gives me access to both market data and order execution. But if I ever want to decouple, I’ll build a Python signal sender and an MQL5 EA receiver using webhooks or JSON.
+
+🌐 5. Deployment — Hosting My Analyzer
+Tool	Use Case
+Ubuntu VPS	To host my backend, data pipeline, or dashboard
+Docker	To containerize everything for easy redeploy
+Nginx	As reverse proxy (FastAPI + frontend access)
+PM2 / Gunicorn	For managing Python processes robustly
+
+📦 My Recommended Full Stack (Modern, Scalable)
+Layer	Tool
+Language	Python
+Backend	FastAPI + pandas-ta or TA-Lib
+Scheduler	APScheduler or Celery
+Data Store	PostgreSQL (or SQLite for dev)
+Frontend	Streamlit (easy) or React + Dash
+Trade Execution	MetaTrader5 Python API / MQL5 EA
+Alerts	Telegram Bot, Discord, Email, Webhook
+ML Enhancements	scikit-learn, XGBoost (optional)

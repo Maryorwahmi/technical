@@ -1,0 +1,181 @@
+📊 1. My Strategy Types & Core Indicator Stack
+Each of my strategies will follow a consistent structure — starting with a core set of indicators, then layering in filters and logic tailored to specific market conditions.
+
+Strategy	Ideal Timeframes	Core Indicators	Entry Type
+Trend	H1, H4, D1	EMA, SuperTrend, MACD	Pullbacks
+Swing	M15, H1	RSI, Stochastic, SMA, Price Action	Reversals
+Breakout	M15, H1, H4	Bollinger Bands, ATR, Volume	Momentum Breakouts
+
+✅ 2. My Signal Rules & Logic
+🔵 Trend-Following Strategy
+Objective: Catch pullbacks within strong, established trends.
+
+Indicators I use:
+
+EMA 20 / 50 / 200
+
+MACD Histogram
+
+SuperTrend
+
+ATR (for SL/TP calculation)
+
+Signal Conditions:
+
+Bullish Setup:
+
+yaml
+Copy
+Edit
+- EMA20 > EMA50 > EMA200 (strong uptrend)
+- Price pulls back near EMA20 or EMA50
+- MACD histogram is rising
+- SuperTrend = bullish
+- Bullish candle pattern (pin bar, engulfing, etc.)
+- Optional: Price breaks previous swing high (confirmation)
+Bearish Setup:
+
+yaml
+Copy
+Edit
+- EMA20 < EMA50 < EMA200 (strong downtrend)
+- Price pulls back near EMA20 or EMA50
+- MACD histogram falling
+- SuperTrend = bearish
+- Bearish candlestick pattern
+Stop Loss / Take Profit:
+
+SL: Below recent swing low or 1.5x ATR
+
+TP: 2x SL or at next resistance/support zone
+
+🔁 Swing / Reversal Strategy
+Objective: Trade clean reversals from overbought/oversold zones using momentum and structure.
+
+Indicators I use:
+
+RSI (14)
+
+Stochastic (14, 3, 3)
+
+SMA 50
+
+Fractals or key support/resistance
+
+Price action (pin bar, engulfing, etc.)
+
+Signal Conditions:
+
+Buy Setup:
+
+yaml
+Copy
+Edit
+- RSI < 30 (oversold)
+- Stochastic crossover below 20
+- Price touches or nears support/fractal zone
+- Bullish candlestick (e.g., hammer, engulfing)
+- SMA50 is flat or upward-sloping
+Sell Setup:
+
+yaml
+Copy
+Edit
+- RSI > 70 (overbought)
+- Stochastic crossover above 80
+- Price near resistance/fractal level
+- Bearish candlestick (e.g., shooting star, bearish engulfing)
+SL/TP:
+
+SL: Just beyond S/R level or 1.2x ATR
+
+TP: 2x SL or SMA50 retest
+
+💥 Breakout Strategy
+Objective: Capture high-momentum breakout moves from consolidation zones.
+
+Indicators I use:
+
+Bollinger Bands
+
+ATR
+
+Volume (or volatility spike)
+
+Price structure (consolidation boxes, triangles)
+
+Signal Conditions:
+
+Buy Breakout:
+
+yaml
+Copy
+Edit
+- Bollinger Bands squeeze (low volatility)
+- ATR rising
+- Price breaks and closes above upper band
+- Volume spike confirms
+- Optional: breakout of consolidation box
+Sell Breakout:
+
+yaml
+Copy
+Edit
+- Bollinger Bands squeeze
+- ATR increasing
+- Price closes below lower band
+- Volume spike or strong momentum candle
+SL/TP:
+
+SL: Inside consolidation box or 1.5x ATR
+
+TP: Use trailing stop or 2–3x SL
+
+⚙️ 3. My Signal Format (JSON Structure)
+This is the structure I use when storing or sending signals to MetaTrader or alert systems:
+
+json
+Copy
+Edit
+{
+  "pair": "EURUSD",
+  "strategy": "Trend",
+  "timeframe": "H1",
+  "direction": "Buy",
+  "entry": 1.08750,
+  "stop_loss": 1.08520,
+  "take_profit": 1.09250,
+  "confidence": 92,
+  "indicators": {
+    "ema": {"20": 1.08630, "50": 1.08400, "200": 1.08000},
+    "macd_histogram": 0.0032,
+    "supertrend": "bullish",
+    "atr": 0.0012
+  },
+  "signal_time": "2025-08-07 14:30 UTC"
+}
+🎯 4. Entry Filters & Quality Control
+Before I allow any trade to go live (or trigger alerts), I apply these filters to improve quality:
+
+✅ Confluence Score: Minimum 3–4 indicators must align
+
+✅ Trend Filter: Confirm higher TF trend supports the trade
+
+✅ ATR Check: Ensure enough volatility is present
+
+✅ Session Filter: Avoid trades during Asian session (unless trading JPY)
+
+✅ Conflict Filter: Avoid trades on correlated pairs at the same time (e.g., EURUSD + GBPUSD)
+
+🧪 5. Forecasting Ideal Entry (When RR Isn’t Ready)
+Sometimes, a signal setup is valid — but the entry price isn’t ideal yet. In those cases, I log the trade as a “pending forecast” and monitor price for better RR.
+
+yaml
+Copy
+Edit
+Forecast Entry Setup:
+  - Signal is valid
+  - Entry skipped due to weak R:R
+  - Target entry zone: 1.0860
+  - Auto-monitor for price to touch zone
+  - If price hits & confluence still valid → activate trade

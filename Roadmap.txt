@@ -1,0 +1,135 @@
+🚀 Forex Analyzer Roadmap v4
+🔹 PHASE 1: CORE SYSTEM DESIGN
+Build the foundations — data, indicators, signal engine, and filtering.
+
+1. Market Data Pipeline
+ Connect to MetaTrader or broker API (e.g., OANDA, FXCM)
+
+ Fetch OHLCV data in M15, H1, H4, D1
+
+ Ensure candle alignment
+
+ Store in local DB (SQLite/Postgres)
+
+2. Indicator Engine
+ Calculate EMA, SMA, SuperTrend, Ichimoku
+
+ Add RSI, Stochastic, MACD
+
+ Add ATR, Bollinger Bands
+
+ Map Support/Resistance zones
+
+ Apply across multiple timeframes
+
+3. Signal Generator
+ Define multi-timeframe confluence logic
+
+ Program entry rules (e.g., RSI < 30 + bullish engulfing + EMA cross)
+
+ Implement SL/TP logic (ATR-based & structure-based)
+
+ Add risk:reward enforcement (e.g., 1:2+)
+
+ Add confidence scoring per signal
+
+4. Noise Filtering Module
+ Filter trades against higher TF trends
+
+ Add ATR volatility threshold
+
+ Implement session filters (avoid low-liquidity times)
+
+ Add correlation filter (prevent conflicting trades)
+
+🔹 PHASE 2: AUTOMATION & EXECUTION
+Make it actionable — connect signals to MetaTrader or alerts.
+
+5. Forecast Module
+ Identify setups with non-optimal price
+
+ Track for price to enter optimal zone
+
+ Revalidate structure dynamically
+
+ Trigger trade or alert when valid
+
+6. Backtesting & Optimization
+ Connect strategy to Backtrader or other framework
+
+ Include slippage, spread, commissions
+
+ Test across 10+ years of data
+
+ Optimize indicators and SL/TP logic
+
+7. MetaTrader Integration
+ Option 1: Use MetaTrader5 Python API
+
+ Option 2: Custom EA + webhook/JSON/Telegram bridge
+
+ Send symbol, entry, SL/TP, direction, confidence
+
+8. Signal Notifications (Optional)
+ Integrate Telegram, Discord, Email, Push
+
+ Format message with:
+
+Pair & TF
+
+Entry + SL/TP
+
+Signal strength
+
+Explanation
+
+Optional: chart snapshot
+
+🔹 PHASE 3: SMART FILTERING & ADAPTATION
+Add intelligence — learn from outcomes to improve signal quality.
+
+9. Machine Learning Enhancements (Optional)
+ Track performance of each signal type
+
+ Score historical setups (good/bad outcomes)
+
+ Train model to identify high-probability conditions
+
+ Use ML to:
+
+Predict better SL/TP zones
+
+Filter false positives
+
+Rank signals by profitability
+
+ Tools: scikit-learn, XGBoost, LightGBM
+
+🔹 PHASE 4: PERFORMANCE MONITORING & SCALING
+Track, improve, and expand.
+
+10. Analytics Dashboard
+ Build dashboard or integrate with existing tools
+
+ Track:
+
+Win rate
+
+Avg risk:reward
+
+Signal frequency
+
+SL/TP stats
+
+Performance per signal type
+
+ Tag & categorize signals for deeper insights
+
+11. Scale to More Pairs/TFs
+ Add more symbols (majors, crosses)
+
+ Add weekly (W1) timeframe if needed
+
+ Ensure system performance at scale
+
+ Prioritize execution latency and DB efficiency
